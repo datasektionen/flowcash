@@ -57,7 +57,7 @@ impl<'a> GameState<'a> {
 #[derive(Debug)]
 struct Player<'a> {
     have_car: bool,
-    in_jail: bool,
+    rounds_in_jail: usize,
     position: BoardPos,
     money: usize,
     loan_count: usize,
@@ -69,7 +69,7 @@ impl<'a> Player<'a> {
     fn new() -> Self {
         Player {
             have_car: false,
-            in_jail: false,
+            rounds_in_jail: 0,
             position: BoardPos::new(0),
             money: 1000, // TODO Set real start amount
             loan_count: 0,
@@ -80,7 +80,8 @@ impl<'a> Player<'a> {
 
     fn take_turn(&mut self) {
         // Might be easier to move logic to gamestate function instead.
-        if self.in_jail {
+        if self.rounds_in_jail != 0 {
+            self.rounds_in_jail -= 1;
             return;
         }
 
