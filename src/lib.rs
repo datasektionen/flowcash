@@ -2,6 +2,7 @@
 pub struct GameState<'a> {
     players: Vec<Player<'a>>,
     stock_tips: Vec<StockTip>,
+    finance_news: Vec<FinanceNews>,
     obligations: Vec<Obligation>,
     shares: Vec<Share>,
     companies: Vec<Company>,
@@ -16,6 +17,7 @@ impl<'a> GameState<'a> {
         }
 
         let stock_tips = GameState::create_stock_tips();
+        let finance_news = GameState::create_finance_news();
         let obligations = GameState::create_obligations();
         let shares = GameState::create_shares();
         let companies = GameState::create_companies();
@@ -23,6 +25,7 @@ impl<'a> GameState<'a> {
         GameState {
             players,
             stock_tips,
+            finance_news,
             obligations,
             shares,
             companies,
@@ -32,6 +35,10 @@ impl<'a> GameState<'a> {
     // Read from another file storing the cards.
     // Probably parse JSON or YAML file.
     fn create_stock_tips() -> Vec<StockTip> {
+        unimplemented!()
+    }
+
+    fn create_finance_news() -> Vec<FinanceNews> {
         unimplemented!()
     }
 
@@ -51,6 +58,26 @@ impl<'a> GameState<'a> {
         for player in &mut self.players {
             player.take_turn()
         }
+    }
+
+    pub fn take_stock_tips(&mut self, player_id: usize) {
+        /*
+        TODO: 
+        - Slumpa fram ett stock tips
+        - genomför dess effekt på spelare och game state
+        - Gör att kortet inte kan dras igen
+        */
+        unimplemented!()
+    }
+
+    pub fn take_finance_news(&mut self, player_id: usize) {
+        /*
+        TODO: 
+        - Slumpa fram ett finance news
+        - Ersätt senast spelade finance news och genomför den nya effekten
+        - Gör att kortet inte kan dras igen
+        */
+        unimplemented!()
     }
 }
 
@@ -145,6 +172,9 @@ impl BoardPos {
 // TODO implement these card types
 #[derive(Debug)]
 pub struct StockTip {}
+
+#[derive(Debug)]
+pub struct FinanceNews {}
 
 #[derive(Debug)]
 pub struct Share {}
